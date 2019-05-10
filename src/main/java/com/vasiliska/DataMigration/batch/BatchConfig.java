@@ -38,14 +38,15 @@ public class BatchConfig {
     @Autowired
     public MongoTemplate mongoTemplate;
 
+    private final String JPQL_QUERY = "SELECT b FROM Book b";
+
     @Bean
     public JpaPagingItemReader<com.vasiliska.DataMigration.models.jpa.Book> reader() {
-        String jpqlQuery = "SELECT b FROM Book b";
         return new JpaPagingItemReaderBuilder<com.vasiliska.DataMigration.models.jpa.Book>()
                 .name("jpaDatabaseReader")
                 .entityManagerFactory(entityManagerFactory)
-                .queryString(jpqlQuery)
-                .pageSize(100)
+                .queryString(JPQL_QUERY)
+                .pageSize(30)
                 .saveState(true)
                 .build();
     }
@@ -100,9 +101,11 @@ public class BatchConfig {
                     public void beforeRead() {
                         logger.info("Start read");
                     }
+
                     public void afterRead(Object o) {
                         logger.info("Finish read");
                     }
+
                     public void onReadError(Exception e) {
                         logger.info("Read error!");
                     }
@@ -111,9 +114,11 @@ public class BatchConfig {
                     public void beforeWrite(List list) {
                         logger.info("Start write");
                     }
+
                     public void afterWrite(List list) {
                         logger.info("Finish write");
                     }
+
                     public void onWriteError(Exception e, List list) {
                         logger.info("Write error!");
                     }

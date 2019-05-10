@@ -1,16 +1,18 @@
 package com.vasiliska.DataMigration;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.batch.test.JobLauncherTestUtils;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootApplication
+@EntityScan(basePackages = "com.vasiliska.DataMigration.models")
+@ComponentScan(basePackages = "com.vasiliska.DataMigration.batch")
 public class DataMigrationApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
+    @Bean
+    JobLauncherTestUtils jobLauncherTestUtils() {
+        return new JobLauncherTestUtils();
+    }
 
 }

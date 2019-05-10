@@ -1,0 +1,20 @@
+spring:
+  mongo:
+    db:
+      name: migrate
+      url: localhost
+      port: 27017
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    initialize: true
+    schema: schema.sql
+    data: test_data.sql
+
+  batch:
+    job:
+      enabled: false
