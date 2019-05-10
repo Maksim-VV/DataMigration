@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+mongo:
+  db:
+    name: migrate
+    url: localhost
+    port: 27017
+
+
+
